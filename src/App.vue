@@ -2,11 +2,27 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import Settings from './components/Settings.vue'
+
+// export default {
+//   methods: {
+//     onSettings (data) {
+//       console.log('Picked', data)
+//     }
+//   }
+//
+// }
+
+const onSettings = (data) => {
+  console.log('Picked', data)
+}
+
 </script>
 
 <template>
   <body>
-<Settings/>
+<Settings @changeSettings='onSettings'/>
+
+
   </body>
 
 </template>
