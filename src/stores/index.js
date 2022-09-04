@@ -1,40 +1,28 @@
 import { createStore } from 'vuex'
 
-const createPersistPlugin = () => {
-    return (store) => {
-        store.subscribe(mutation => {
-            localStorage.setItem(`state`, JSON.stringify(store.state.count))
-        })
-    }
-}
+// const createPersistPlugin = () => {
+//     return (store) => {
+//         store.subscribe(mutation => {
+//             localStorage.setItem(`time`, JSON.stringify(store.state.time))
+//         })
+//     }
+// }
 
 const store = createStore({
     state() {
         return {
-            // count: 0,
-            count: JSON.parse(localStorage.getItem(`state`)) || 0,
-            userData: {},
-            news: []
-        }
-    },
-    mutations: {
-        increment(state) {
-            state.count++
-        },
-        setValue(state, value) {
-            state.count = value
-        }
-    },
-    actions: {
-        asyncIncrement(store) {
-            store.commit('increment')
-            setTimeout(() => {
-                store.commit('increment')
-            }, 1000)
+            // time: JSON.parse(localStorage.getItem('time'))
+            time: 10,
 
         }
     },
-    plugins: [createPersistPlugin()],
+    mutations: {
+        setTimeValue(state, value) {
+            state.time = value
+        }
+    },
+    actions: {},
+    // plugins: [createPersistPlugin()],
 })
 
 export default store

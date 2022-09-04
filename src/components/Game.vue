@@ -2,11 +2,18 @@
 export default {
   name: "Game",
   data: () => ({
-    currentTime: 200,
+    currentTime: 1,
     timer: null,
   }),
+
   mounted() {
-    this.startTimer()
+    // if (localStorage.time) {
+    //   console.log(Number(localStorage.time))
+    //   this.currentTime = JSON.parse(localStorage.getItem('time')) * 60
+    // }
+    this.currentTime = this.$store.state.time * 60
+    this.startTimer();
+
   },
   destroyed() {
     this.stopTimer()
@@ -14,7 +21,7 @@ export default {
   methods: {
     startTimer() {
       this.timer = setInterval(() => {
-        this.currentTime--
+        this.currentTime -= 1
       }, 1000)
     },
     stopTimer() {
@@ -35,6 +42,7 @@ export default {
 
   <body>
   <div class="head">
+<!--    {{countValue}}-->
   <RouterLink to="/">
     <button type="button" class="btn btn-primary mt-3">back</button>
   </RouterLink>

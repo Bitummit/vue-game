@@ -46,7 +46,7 @@
   </div>
 
 <!--  <button class="btn btn-primary mt-5" @click='changeSettings' role="button">Start</button>-->
-    <RouterLink to="/game"><button type="button" class="btn btn-primary mt-3" @click='changeSettings'>start</button></RouterLink>
+    <RouterLink to="/game"><button type="button" class="btn btn-primary mt-3" @click='setValue'>start</button></RouterLink>
 </template>
 
 <script>
@@ -65,7 +65,10 @@ export default {
         time: this.time,
         difficulty: this.difficulty,
       })
-    }
+    },
+    setValue() {
+      this.$store.commit('setTimeValue', this.time)
+    },
   },
 
 
