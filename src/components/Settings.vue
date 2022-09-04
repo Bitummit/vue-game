@@ -44,10 +44,9 @@
       Деление
     </label>
   </div>
-{{checkedSettings}}
 
-  <button class="btn btn-primary mt-5" @click='changeSettings' role="button">Start</button>
-
+<!--  <button class="btn btn-primary mt-5" @click='changeSettings' role="button">Start</button>-->
+    <RouterLink to="/game"><button type="button" class="btn btn-primary mt-3" @click='changeSettings'>start</button></RouterLink>
 </template>
 
 <script>
