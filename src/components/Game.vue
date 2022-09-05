@@ -13,7 +13,6 @@ export default {
     answer1: 0,
     answer2: 0,
   }),
-  // props: ['id'],
 
   mounted() {
     this.refreshData()
@@ -46,7 +45,7 @@ export default {
       else if (this.dif > 3 || this.dif < 7 ) {
         max = 60
       } else {
-        max = 100
+        max = 130
       }
       let rand = min + Math.random() * (max + 1 - min)
       return Math.floor(rand)
@@ -63,11 +62,6 @@ export default {
         this.$store.commit('increment')
         this.clearData()
         this.refreshData()
-        // this.$router.push(
-        //   {
-        //     name: 'game',
-        //     params: {id: this.countGames}
-        //   })
 
       }
     },
@@ -114,8 +108,6 @@ export default {
 
   <body>
   <div class="head">
-    {{numbers}}
-    {{id}}
   <RouterLink to="/">
     <button type="button" class="btn btn-primary mt-3">Exit</button>
   </RouterLink>
@@ -130,10 +122,10 @@ export default {
   <div style="text-align: center">
     {{ numbers[0] }}
     {{ firstOperation }}
-    <input style="width: 5%" maxlength="2" v-model="answer1">
+    <input style="width: 5%" maxlength="2" v-model="answer1" v-on:keyup.enter="checkAnswer">
     <span v-if="dif > 5">
       {{ secondOperation }}
-      <input style="width: 5%" maxlength="2" v-model="answer2">
+      <input style="width: 5%" maxlength="2" v-model="answer2" v-on:keyup.enter="checkAnswer">
     </span>
     <p style="text-align: center" class="mt-2">= {{result}}</p>
   </div>

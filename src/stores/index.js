@@ -3,7 +3,9 @@ import { createStore } from 'vuex'
 const createPersistPlugin = () => {
     return (store) => {
         store.subscribe(mutation => {
-            localStorage.setItem(`fixedTime`, JSON.stringify(store.state.fixedTime))
+            localStorage.setItem(`time`, JSON.stringify(store.state.time))
+            localStorage.setItem(`countGames`, JSON.stringify(store.state.countGames))
+            localStorage.setItem(`difficulty`, JSON.stringify(store.state.difficulty))
         })
     }
 }
@@ -11,17 +13,19 @@ const createPersistPlugin = () => {
 const store = createStore({
     state() {
         return {
-            fixedTime: JSON.parse(localStorage.getItem('fixedTime')),
             time: 0,
             difficulty: 1,
             operations: [],
-            countGames: 1,
+            countGames: JSON.parse(localStorage.getItem('countGames')) || 0,
 
         }
     },
     mutations: {
         increment(state) {
             state.countGames++
+        },
+        setCountGamesValue(state, value) {
+            state.countGames = value
         },
         setTimeValue(state, value) {
             state.time = value
@@ -31,12 +35,10 @@ const store = createStore({
         },
         setOperationsValue(state, value) {
             state.operations = value
-            console.log(value)
-            console.log(state.operations)
         },
     },
     actions: {},
-    // plugins: [createPersistPlugin()],
+    plugins: [createPersistPlugin()],
 })
 
 export default store

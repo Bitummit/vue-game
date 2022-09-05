@@ -2,8 +2,8 @@
 
   <h1>Привет!</h1>
   <div class="mt-3">
-    <p>Добро пожаловать на N тенировочный день,</p>
-    <p>Ваш последний результат - решено {{countGames}} за N минут.</p>
+    <p>Добро пожаловать на тенировочный день,</p>
+    <p>Ваш последний результат - решено {{countGames}} за {{lastTime}} минут на сложности {{lastDif}}.</p>
   </div>
 
   <br>
@@ -43,7 +43,7 @@
       Деление
     </label>
   </div>
-    <RouterLink :to="{name: 'game'}"><button type="button" class="btn btn-primary mt-3" @click='setValues '>start</button></RouterLink>
+    <RouterLink :to="{name: 'game'}"><button type="button" class="btn btn-primary mt-3" @click='setValues' :disabled="checkedSettings.length === 0">start</button></RouterLink>
 </template>
 
 <script>
@@ -53,10 +53,20 @@ export default {
     checkedSettings: [],
     time: 1,
     difficulty: 1,
-    countGames: 0
+    countGames: 0,
+    lastTime: 0,
+    lastDif: 0
   }),
   mounted() {
-    this.countGames = this.$store.state.countGames
+    if (localStorage.countGames) {
+      this.countGames = this.$store.state.countGames
+    }
+    if (localStorage.time) {
+      this.lastTime = this.$store.state.time
+    }
+    if (localStorage.difficulty) {
+      this.lastDif = this.$store.state.difficulty
+    }
   },
 
   methods: {
@@ -64,7 +74,7 @@ export default {
       this.$store.commit('setTimeValue', this.time);
       this.$store.commit('setDifValue', this.difficulty);
       this.$store.commit('setOperationsValue', this.checkedSettings)
-      this.$store.state.countGames = 1
+      this.$store.commit('setCountGamesValue', 0);
 
     },
 
